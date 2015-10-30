@@ -1,5 +1,22 @@
+var express = require('express');
+var app = express();
+
+var server = app.listen(8000, function(){
+  console.log("server running on port 8000");
+});
+
+var io = require('socket.io').listen(server);
+var path = require("path");
+var fs = require('fs');
+
 var five = require("johnny-five"),
   board, potentiometer;
+
+
+app.use(express.static(path.join(__dirname, "./static")));
+
+io.on('connection', function (socket) {
+  console.log("Connected to user :" + socket.id);
 
 board = new five.Board();
 
@@ -8,7 +25,7 @@ board.on("ready", function() {
   // Create a new `potentiometer` hardware instance.
   potentiometer = new five.Sensor({
     pin: "A0",
-    freq: 500
+    freq:1000
   });
 
   // Inject the `sensor` hardware into
@@ -36,11 +53,13 @@ board.on("ready", function() {
     }
     var avg = sum/array.length;
     console.log('average'+ avg);
-    if(avg < initAvg -20){
-      console.log('SCored!!');
+    socket.emit('avg', avg);
+
+    if(avg < initAvg - 20){
+      console.log('Scored!!');
+      socket.emit('scored');
     }
 
   });
-
-
+});
 });

@@ -1,0 +1,111 @@
+<html>
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
+  <style>
+  *{
+    font-family: 'Marcellus SC', serif;
+    font-weight: 200;
+    margin: 0;
+    padding:  0;
+    text-align: center;
+    }
+
+    html{
+    background: url(http://www.fadedindustry.com/wp-content/uploads/2013/11/glowing-beer-pong-table.jpg);
+    }
+
+    #container{
+    width: 100%;
+    margin: 5% auto;
+    }
+
+    #player1{
+    background-color: rgba(0,0,0,0.8);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    width: 65%;
+    height: 300px;
+    margin: 0 auto;
+    }
+    #player1 h1,
+    #player2 h1{
+    font-size: 60px;
+    color: white;
+    line-height: 100px;
+    }
+
+    #player2{
+    background-color: rgba(0,0,0,0.4);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: 65%;
+    height: 300px;
+    margin: 0 auto;
+    }
+
+    .scoreblock {
+    background-color: rgba(0,0,0,0);
+    border-radius: 15px;
+    color: white;
+    position: relative;
+    float: left;
+    font-size: 100px;
+    line-height: 150px;
+    list-style: none;
+    left: 15%;
+    margin: 0 10px;
+    width: 20%;
+    height: 150px;
+    }
+
+    .minus:hover,
+    .plus:hover{
+    background-color: rgba(255,255,255, 0.3);
+    }
+
+    .minus:active,
+    .plus:active{
+    background-color: rgba(255,255,255, 0.7);
+    }
+
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8000');
+    socket.on('avg', function (avg) {
+      console.log(avg);
+    });
+
+    socket.on('scored', function(data){
+      console.log("SCORED!!!");
+    });
+  </script>
+</head>
+<body>
+  <div id = "container">
+
+    <div id = "player1">
+      <div id="p1score">
+        <h1>Player 1</h1>
+        <ul>
+          <li class="scoreblock minus" onclick="minusOne(score1)">-</li>
+          <li id="p120" class="scoreblock" value=20></li>
+          <li class="scoreblock plus" onclick="addOne(score1)">+</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id = "player2">
+      <div id="p2score">
+       <h1>Player 2</h1>
+       <ul>
+         <li class="scoreblock minus" onclick="minusOne(score2)">-</li>
+         <li id="p220" class="scoreblock" value=20></li>
+         <li class="scoreblock plus" onclick="addOne(score2)">+</li>
+       </ul>
+     </div>
+    </div>
+
+  </div>
+</body>
+</html>
