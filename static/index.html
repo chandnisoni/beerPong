@@ -67,30 +67,69 @@
     .plus:active{
     background-color: rgba(255,255,255, 0.7);
     }
+    #banner{
+      color: white;
+    }
+    .scoreblock {
+      color: white;
+    }
 
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
+  $(function(){
+    var score1 = 0;
+    var score2 = 0;
+
+    $('#btn-minus-1').click(function(){
+      score1 -= 1;
+      $('#p120').html(score1);
+      $('#banner').html('');
+    });
+
+    $('#btn-minus-2').click(function(){
+      score2 -= 1;
+      $('#p220').html(score2);
+      $('#banner').html('');
+    });
+
+    $('#btn-plus-1').click(function(){
+      score1 += 1;
+      $('#p120').html(score1);
+      $('#banner').html('');
+    });
+
+    $('#btn-plus-2').click(function(){
+      score2 += 1;
+      $('#p220').html(score2);
+      $('#banner').html('');
+    });
+
     var socket = io.connect('http://localhost:8000');
     socket.on('avg', function (avg) {
       console.log(avg);
+      socket.emit('server_response', {response: "sockets are the best!"});
     });
 
     socket.on('scored', function(data){
       console.log("SCORED!!!");
+      $('#banner').html('SCORED!');
     });
+  });
   </script>
 </head>
 <body>
   <div id = "container">
 
+    <h1 id="banner"></h1>
     <div id = "player1">
       <div id="p1score">
         <h1>Player 1</h1>
         <ul>
-          <li class="scoreblock minus" onclick="minusOne(score1)">-</li>
-          <li id="p120" class="scoreblock" value=20></li>
-          <li class="scoreblock plus" onclick="addOne(score1)">+</li>
+          <li id='btn-minus-1' class="scoreblock minus">-</li>
+          <li id="p120" class="scoreblock">0</li>
+          <li id='btn-plus-1' class="scoreblock plus">+</li>
         </ul>
       </div>
     </div>
@@ -99,9 +138,9 @@
       <div id="p2score">
        <h1>Player 2</h1>
        <ul>
-         <li class="scoreblock minus" onclick="minusOne(score2)">-</li>
-         <li id="p220" class="scoreblock" value=20></li>
-         <li class="scoreblock plus" onclick="addOne(score2)">+</li>
+         <li id='btn-minus-2' class="scoreblock minus">-</li>
+         <li id="p220" class="scoreblock">0</li>
+         <li id='btn-plus-2' class="scoreblock plus">+</li>
        </ul>
      </div>
     </div>
