@@ -7,3 +7,5 @@ Proposed Solution: Designed a prototype for Beer Pong using Breadboard, Arduino 
 Future Prospects:  Integrating the LED light beneath the cup to make it more fun.
 
 Technologies Used:  node.js, express, socket.io, johnny-five.  
+
+##Installation
