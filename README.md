@@ -9,6 +9,7 @@ Designed a prototype for Beer Pong using Breadboard, Arduino Board(Arduino Uno) 
 ##Future Prospects
 Integrating the LED light beneath the cup to make it more fun.
 
-##Technologies Used: node.js, express, socket.io, johnny-five.  
+##Technologies Used
+node.js, express, socket.io, johnny-five.  
 
 
