@@ -1,4 +1,4 @@
-#Project : Interactive Beer Pong.
+#Interactive Beer Pong.
 
 Problem Statement: Keeping track of scores can be difficult while playing Beer Pong. As a beer pong player, I want to automate the task of keeping track of scores. 
 
@@ -8,4 +8,4 @@ Future Prospects:  Integrating the LED light beneath the cup to make it more fun
 
 Technologies Used:  node.js, express, socket.io, johnny-five.  
 
-##Installation
+
